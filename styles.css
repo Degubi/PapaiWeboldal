@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+    font-family: Arial;
+}
+
+#topInfoBar {
+    width: 100%;
+    background-color: #363940;
+    padding: 8px 0px 8px 0px;
+}
+
+#routesBar {
+    display: flex;
+    border-bottom: 2px solid #363940;
+    padding: 8px 0px 8px 0px;
+    align-items: center;
+    height: 10%;
+}
+
+#routesBar a {
+    text-decoration: none;
+    padding: 0px 16px 0px 16px;
+    color: #363940;
+    padding-bottom: 25%;
+}
+
+#routesBar .active {
+    color: #3ec1b0;
+}
+
+#routesContainer {
+    display: inline-block;
+    margin-left: 35%;
+}
+
+#logo {
+    margin-left: 15%;
+    object-fit: contain;
+    height: 100%;
+}
+
+#footer {
+    padding-top: 32px;
+    border-top: 2px solid #363940;
+}
+
+#footer table {
+    margin: auto;
+}
+
+#footer th {
+    color: #4cbcad;
+    padding-bottom: 8px;
+}
+
+#footer td {
+    padding: 0px 45px;
+}
+
+.topInfoField {
+    color: white;
+    font-weight: bold;
+}
+
+.topInfoValue {
+    color: #4cbcad;
+    font-weight: bold;
+}
