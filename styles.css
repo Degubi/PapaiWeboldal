@@ -4,33 +4,42 @@ body {
 }
 
 #topInfoBar {
-    width: 100%;
     background-color: #363940;
-    padding: 8px 0px 8px 0px;
+    padding: 8px 0px;
 }
 
-#routesBar {
+.topInfoField {
+    color: white;
+    font-weight: bold;
+}
+
+.topInfoValue {
+    color: #4cbcad;
+    font-weight: bold;
+}
+
+#navContainer {
     display: flex;
+    justify-content: space-between;
     border-bottom: 2px solid #363940;
-    padding: 8px 0px 8px 0px;
+    padding: 8px 0px;
     align-items: center;
     height: 10%;
 }
 
-#routesBar a {
+#navContainer a {
     text-decoration: none;
-    padding: 0px 16px 0px 16px;
+    padding: 0px 16px;
     color: #363940;
-    padding-bottom: 25%;
+    cursor: pointer;
 }
 
-#routesBar .active {
+#navContainer .active {
     color: #3ec1b0;
 }
 
 #routesContainer {
-    display: inline-block;
-    margin-left: 35%;
+    margin-right: 15%;
 }
 
 #logo {
@@ -55,14 +64,4 @@ body {
 
 #footer td {
     padding: 0px 45px;
-}
-
-.topInfoField {
-    color: white;
-    font-weight: bold;
-}
-
-.topInfoValue {
-    color: #4cbcad;
-    font-weight: bold;
 }

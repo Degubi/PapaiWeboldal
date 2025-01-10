@@ -1,6 +1,9 @@
-<html>
+<html lang = "hu">
     <head>
+        <meta charset = "utf-8">
+        <title>Pápai Fázismester KFT</title>
         <link rel = "stylesheet" href = "styles.css">
+        <script src = "index.js" type = "module"></script>
     </head>
     <body>
         <div id = "topInfoBar">
@@ -9,15 +12,16 @@
             <span class = "topInfoField" style = "margin-left: 5%">Email:</span>
             <span class = "topInfoValue">blablabla@gmail.com</span>
         </div>
-        <div id = "routesBar">
+        <div id = "navContainer">
             <img id = "logo" src = "assets/logo.jpg">
             <div id = "routesContainer">
-                <a href = "index.html" class = "active">Főoldal</a>
-                <a href = "services.html">Szolgáltatások</a>
-                <a href = "about.html">Rólunk</a>
-                <a href = "contact.html">Elérhetőség</a>
+                <a onclick = "routeTo('main')">Főoldal</a>
+                <a onclick = "routeTo('services')">Szolgáltatások</a>
+                <a onclick = "routeTo('about')">Rólunk</a>
+                <a onclick = "routeTo('contact')">Elérhetőség</a>
             </div>
         </div>
+        <div id = "content"></div>
         <div id = "footer">
             <table>
                 <tr>
