@@ -2,6 +2,7 @@ body {
     margin: 0;
     font-family: Arial;
     overflow-x: hidden;
+    height: 100vh;
 }
 
 header {
@@ -45,7 +46,6 @@ nav .active-route {
 
 #logo {
     margin-left: 15%;
-    object-fit: contain;
     height: 100%;
 }
 
@@ -53,6 +53,7 @@ footer {
     padding: 16px;
     border-top: 2px solid #363940;
     background-color: #363940;
+    overflow-x: hidden;
 }
 
 footer table {
