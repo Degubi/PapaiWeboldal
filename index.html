@@ -2,39 +2,55 @@
     <head>
         <meta charset = "utf-8">
         <title>Pápai Fázismester KFT</title>
+        <link rel = "preload" href = "assets/main/shop.webp" as = "image">
+        <link rel = "preload" href = "main.html" as = "fetch" crossorigin = "anonymous">
         <link rel = "stylesheet" href = "styles.css">
         <script src = "index.js" type = "module"></script>
     </head>
     <body>
-        <div id = "topInfoBar">
+        <header>
             <span class = "topInfoField" style = "margin-left: 15%">Telefon:</span>
-            <span class = "topInfoValue">123456789</span>
+            <span class = "topInfoValue">+36-30-92-24-271</span>
             <span class = "topInfoField" style = "margin-left: 5%">Email:</span>
-            <span class = "topInfoValue">blablabla@gmail.com</span>
-        </div>
-        <div id = "navContainer">
+            <span class = "topInfoValue">papaiimre69@gmail.com</span>
+        </header>
+        <nav>
             <img id = "logo" src = "assets/logo.jpg">
             <div id = "routesContainer">
                 <a onclick = "routeTo('main')">Főoldal</a>
-                <a onclick = "routeTo('services')">Szolgáltatások</a>
+                <a onclick = "routeTo('gallery')">Galéria</a>
                 <a onclick = "routeTo('about')">Rólunk</a>
                 <a onclick = "routeTo('contact')">Elérhetőség</a>
             </div>
-        </div>
-        <div id = "content"></div>
-        <div id = "footer">
+        </nav>
+        <div id = "content" style = "overflow: hidden;"></div>
+        <footer>
             <table>
                 <tr>
-                    <th>Oszlop1</th>
-                    <th>Oszlop2</th>
-                    <th>Oszlop3</th>
+                    <th>Megbízhatóság</th>
+                    <th>Profil</th>
+                    <th>Mottó</th>
                 </tr>
                 <tr>
-                    <td>Sokszoveg1</td>
-                    <td>Sokszoveg2</td>
-                    <td>Sokszoveg3</td>
+                    <td>30 évnyi tapasztalat</td>
+                    <td>Villamossági hálózatok</td>
+                    <td>Alaposság</td>
+                </tr>
+                <tr>
+                    <td>Regisztrált villanyszerelő</td>
+                    <td>Rendezvények elektromos hálózatai</td>
+                    <td>Precizitás</td>
+                </tr>
+                <tr>
+                    <td>Teljes körű ügyintézés</td>
+                    <td>Napelemek</td>
+                    <td>Szakértelem</td>
+                </tr>
+                <tr>
+                    <td>Előírások betartása</td>
+                    <td>PLC Programozás</td>
                 </tr>
             </table>
-        </div>
+        </footer>
     </body>
 </html>

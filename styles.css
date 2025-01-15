@@ -1,11 +1,12 @@
 body {
     margin: 0;
     font-family: Arial;
+    overflow-x: hidden;
 }
 
-#topInfoBar {
+header {
     background-color: #363940;
-    padding: 8px 0px;
+    padding: 16px 0px;
 }
 
 .topInfoField {
@@ -18,23 +19,23 @@ body {
     font-weight: bold;
 }
 
-#navContainer {
+nav {
     display: flex;
     justify-content: space-between;
     border-bottom: 2px solid #363940;
     padding: 8px 0px;
     align-items: center;
-    height: 10%;
+    height: 5%;
 }
 
-#navContainer a {
+nav a {
     text-decoration: none;
     padding: 0px 16px;
     color: #363940;
     cursor: pointer;
 }
 
-#navContainer .active {
+nav .active-route {
     color: #3ec1b0;
 }
 
@@ -48,20 +49,24 @@ body {
     height: 100%;
 }
 
-#footer {
-    padding-top: 32px;
+footer {
+    padding: 16px;
     border-top: 2px solid #363940;
+    background-color: #363940;
 }
 
-#footer table {
+footer table {
     margin: auto;
 }
 
-#footer th {
+footer th {
+    font-size: 24px;
     color: #4cbcad;
-    padding-bottom: 8px;
+    padding-bottom: 32px;
 }
 
-#footer td {
-    padding: 0px 45px;
+footer td {
+    font-size: 20px;
+    color: white;
+    padding: 0px 45px 8px 45px;
 }
