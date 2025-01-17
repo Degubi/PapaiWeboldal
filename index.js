@@ -26,7 +26,7 @@ function showPage() {
             routeButtons[1].className = 'active-route';
             break;
         case 'about':
-            contentElement.style.margin = '24px 64px';
+            contentElement.style.margin = '24px';
             fetch('about.html').then(k => k.text()).then(k => contentElement.innerHTML = k);
             routeButtons[2].className = 'active-route';
             break;
