@@ -119,4 +119,13 @@ footer li {
         align-items: center;
         text-align: center;
     }
+
+    footer h3 {
+        font-size: 20px;
+        padding: 1px 0px 4px 0px;
+    }
+
+    footer li {
+        font-size: 16px;
+    }
 }
