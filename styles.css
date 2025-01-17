@@ -10,6 +10,18 @@ header {
     padding: 16px 0px;
 }
 
+#phone-num-field {
+    margin-left: 15%;
+}
+
+#phone-email-separator {
+    display: none;
+}
+
+#email-field {
+    margin-left: 5%;
+}
+
 .topInfoField {
     color: white;
     font-weight: bold;
@@ -74,4 +86,15 @@ footer td {
     font-size: 20px;
     color: white;
     padding: 0px 45px 8px 45px;
+}
+
+
+@media(max-width: 768px) {
+    #phone-num-field {
+        margin-left: 5%;
+    }
+
+    #phone-email-separator {
+        display: block;
+    }
 }
