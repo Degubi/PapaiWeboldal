@@ -72,17 +72,25 @@ footer {
     overflow-x: hidden;
 }
 
-footer table {
-    margin: auto;
+footer #table {
+    display: flex;
+    justify-content: center;
 }
 
-footer th {
+footer h3 {
+    text-align: center;
     font-size: 24px;
     color: #4cbcad;
-    padding-bottom: 32px;
+    margin: 0px;
+    padding: 1px 0px 16px 0px;
 }
 
-footer td {
+footer ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+footer li {
     font-size: 20px;
     color: white;
     padding: 0px 45px 8px 45px;
@@ -96,5 +104,19 @@ footer td {
 
     #phone-email-separator {
         display: block;
+    }
+
+    #logo {
+        margin-left: 5%;
+    }
+
+    nav a {
+        float: right;
+    }
+
+    footer #table {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 }
