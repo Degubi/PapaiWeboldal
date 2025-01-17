@@ -16,23 +16,35 @@ function showPage() {
 
     switch(currentPagePath) {
         case 'main':
-            contentElement.style.margin = '0px';
-            fetch('main.html').then(k => k.text()).then(k => contentElement.innerHTML = k);
+            fetch('main.html').then(k => k.text()).then(k => {
+                contentElement.style.margin = '0px';
+                contentElement.innerHTML = k;
+            });
+
             routeButtons[0].className = 'active-route';
             break;
         case 'gallery':
-            contentElement.style.margin = '24px 16%';
-            fetch('gallery.html').then(k => k.text()).then(k => contentElement.innerHTML = k);
+            fetch('gallery.html').then(k => k.text()).then(k => {
+                contentElement.style.margin = '24px';
+                contentElement.innerHTML = k;
+            });
+
             routeButtons[1].className = 'active-route';
             break;
         case 'about':
-            contentElement.style.margin = '24px';
-            fetch('about.html').then(k => k.text()).then(k => contentElement.innerHTML = k);
+            fetch('about.html').then(k => k.text()).then(k => {
+                contentElement.style.margin = '24px';
+                contentElement.innerHTML = k;
+            });
+
             routeButtons[2].className = 'active-route';
             break;
         case 'contact':
-            contentElement.style.margin = '24px';
-            fetch('contact.html').then(k => k.text()).then(k => contentElement.innerHTML = k);
+            fetch('contact.html').then(k => k.text()).then(k => {
+                contentElement.style.margin = '24px';
+                contentElement.innerHTML = k;
+            });
+
             routeButtons[3].className = 'active-route';
             break;
     }
@@ -73,3 +85,43 @@ window.routeTo = function(pagePath) {
 
 window.slideByOffset = function(n) { showSlide(slideIndex += n); };
 window.nthSlide = function(n) { showSlide(slideIndex = n); };
+window.zoomGalleryImage = function(/**@type { HTMLImageElement } */ clickedImage) {
+    const scrollY = window.scrollY;
+    const removeZoomedImage = () => {
+        document.body.style.overflowY = '';
+        document.body.removeChild(fullscreenImage);
+        document.body.removeChild(modalBackground);
+        document.body.removeEventListener('keyup', escapeKeyListener);
+    };
+
+    const fullscreenImage = document.createElement('img');
+    fullscreenImage.src = clickedImage.src;
+    fullscreenImage.style.height = '80%';
+    fullscreenImage.style.position = 'absolute';
+    fullscreenImage.style.zIndex = '2';
+    fullscreenImage.style.top = `calc(${scrollY}px + 50%)`;
+    fullscreenImage.style.left = '50%';
+    fullscreenImage.style.translate = '-50% -50%';
+
+    const modalBackground = document.createElement('div');
+    modalBackground.style.position = 'absolute';
+    modalBackground.style.top = `${scrollY}px`;
+    modalBackground.style.width = '100%';
+    modalBackground.style.height = '100%';
+    modalBackground.style.backgroundColor = 'black';
+    modalBackground.style.opacity = '0.75';
+    modalBackground.style.zIndex = '1';
+
+    const escapeKeyListener = (/** @type { KeyboardEvent } */ e) => {
+        if(e.key === 'Escape') {
+            removeZoomedImage();
+        }
+    };
+
+    modalBackground.addEventListener('click', removeZoomedImage);
+
+    document.body.style.overflowY = 'hidden';
+    document.body.appendChild(modalBackground);
+    document.body.appendChild(fullscreenImage);
+    document.body.addEventListener('keyup', escapeKeyListener);
+};
