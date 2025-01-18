@@ -2,12 +2,17 @@
     .zoom {
         height: 33vh;
         padding: 25px;
-        transition: transform .5s;
-        cursor: pointer;
     }
 
-    .zoom:hover {
-        transform: scale(1.25);
+    @media(hover: hover) {
+        .zoom {
+            transition: transform .5s;
+            cursor: pointer;
+        }
+
+        .zoom:hover {
+            transform: scale(1.25);
+        }
     }
 </style>
 

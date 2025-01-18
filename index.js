@@ -32,6 +32,8 @@ function showPage() {
             routeButtons[1].className = 'active-route';
             break;
         case 'about':
+            contentElement.appendChild(createPreloadElement('assets/about/shop.webp', 'image'));
+
             fetch('about.html').then(k => k.text()).then(k => {
                 contentElement.style.margin = '24px';
                 contentElement.innerHTML = k;
@@ -40,6 +42,11 @@ function showPage() {
             routeButtons[2].className = 'active-route';
             break;
         case 'contact':
+            const preconnect = document.createElement('link');
+            preconnect.href = 'https://www.google.com';
+            preconnect.toggleAttribute('crossorigin');
+            contentElement.appendChild(preconnect);
+
             fetch('contact.html').then(k => k.text()).then(k => {
                 contentElement.style.margin = '24px';
                 contentElement.innerHTML = k;
@@ -48,6 +55,14 @@ function showPage() {
             routeButtons[3].className = 'active-route';
             break;
     }
+}
+
+function createPreloadElement(path, type) {
+    const element = document.createElement('link');
+    element.rel = 'preload';
+    element.href = path;
+    element.as = type;
+    return element;
 }
 
 function showSlide(n) {
@@ -96,12 +111,17 @@ window.zoomGalleryImage = function(/**@type { HTMLImageElement } */ clickedImage
 
     const fullscreenImage = document.createElement('img');
     fullscreenImage.src = clickedImage.src;
-    fullscreenImage.style.height = '80%';
     fullscreenImage.style.position = 'absolute';
     fullscreenImage.style.zIndex = '2';
     fullscreenImage.style.top = `calc(${scrollY}px + 50%)`;
     fullscreenImage.style.left = '50%';
     fullscreenImage.style.translate = '-50% -50%';
+
+    if(window.innerWidth < window.innerHeight) {
+        fullscreenImage.style.width = '80%';
+    }else{
+        fullscreenImage.style.height = '80%';
+    }
 
     const modalBackground = document.createElement('div');
     modalBackground.style.position = 'absolute';
