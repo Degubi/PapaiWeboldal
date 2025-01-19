@@ -1,7 +1,7 @@
 <style>
-    #info-container {
-        margin-left: 25%;
-        width: 33%;
+    .info-container {
+        margin-left: 5%;
+        width: 20%;
         display: inline-block;
         vertical-align: top;
     }
@@ -13,8 +13,12 @@
         aspect-ratio: 4 / 3;
     }
 
+    #opening-hours-table td {
+        padding: 0px 16px;
+    }
+
     @media(max-width: 768px) {
-        #info-container {
+        .info-container {
             margin-left: 5%;
             width: 100%;
             display: block;
@@ -27,11 +31,42 @@
 </style>
 
 <h1 style = "text-align: center">Elérhetőség, adatok</h1>
-<div id = "info-container">
-    <h3>Pápai Fázismester Kft.</h3>
+<div class = "info-container">
+    <h2>Bolt</h2>
+    <p><b>Cím:</b> 5400 Mezőtúr, Kossuth Lajos u. 67</p>
+    <p><b>E-mail:</b> papai.fm01@gmail.com</p>
+    <p><b>Telefonszám:</b> +36-30-292-6403</p>
+    <p style = "display: inline-block; margin-top: 0px;"><b>Nyitvatartás:</b></p>
+    <table id = "opening-hours-table" style = "display: inline-block; vertical-align: top; border-spacing: 0px;">
+        <tbody>
+            <tr id = "day-1">
+                <td>Hétfő</td><td>8:00-17:00</td>
+            </tr>
+            <tr id = "day-2">
+                <td>Kedd</td><td>8:00-17:00</td>
+            </tr>
+            <tr id = "day-3">
+                <td>Szerda</td><td>8:00-17:00</td>
+            </tr>
+            <tr id = "day-4">
+                <td>Csütörtök</td><td>8:00-17:00</td>
+            </tr>
+            <tr id = "day-5">
+                <td>Péntek</td><td>8:00-17:00</td>
+            </tr>
+            <tr id = "day-6">
+                <td>Szombat</td><td>Zárva</td>
+            </tr>
+            <tr id = "day-0">
+                <td>Vasárnap</td><td>Zárva</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class = "info-container">
+    <h2>Személyes</h2>
     <p><b>Név:</b> Pápai Imre</p>
     <p><b>E-mail:</b> papaiimre69@gmail.com</p>
     <p><b>Telefonszám:</b> +36-30-92-24-271</p>
-    <p><b>Cím:</b> 5400 Mezőtúr, Kossuth Lajos u. 67</p>
 </div>
 <iframe id = "maps-embed" allowfullscreen referrerpolicy = "no-referrer-when-downgrade" src = "https://www.google.com/maps/embed/v1/place?key=AIzaSyCFNAORSAxmZV9j-mFYgti_gAkiYFAaB_I&q=Pápai+Fázismester+Kft">

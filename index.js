@@ -50,6 +50,8 @@ function showPage() {
             fetch('contact.html').then(k => k.text()).then(k => {
                 contentElement.style.margin = '24px';
                 contentElement.innerHTML = k;
+
+                document.getElementById(`day-${new Date().getDay()}`).style.fontWeight = 'bold';
             });
 
             routeButtons[3].className = 'active-route';

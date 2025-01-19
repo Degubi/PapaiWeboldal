@@ -2,7 +2,6 @@ body {
     margin: 0;
     font-family: Arial;
     overflow-x: hidden;
-    height: 100vh;
 }
 
 header {
@@ -14,8 +13,13 @@ header {
     margin-left: 15%;
 }
 
-#phone-email-separator {
+#phone-email-separator, #email-opening-hours-separator {
     display: none;
+}
+
+#opening-hours-container {
+    margin-right: 15%;
+    float: right;
 }
 
 #email-field {
@@ -43,6 +47,7 @@ nav {
     padding: 8px 0px;
     align-items: center;
     height: 5%;
+    width: 100%;
 }
 
 nav a {
@@ -62,7 +67,7 @@ nav .active-route {
 
 #logo {
     margin-left: 15%;
-    height: 100%;
+    width: 5%;
 }
 
 footer {
@@ -102,12 +107,20 @@ footer li {
         margin-left: 5%;
     }
 
-    #phone-email-separator {
+    #phone-email-separator, #email-opening-hours-separator {
         display: block;
+    }
+
+
+    #opening-hours-container {
+        float: none;
+        margin-right: 0px;
+        margin-left: 5%;
     }
 
     #logo {
         margin-left: 5%;
+        width: 20%;
     }
 
     nav a {
