@@ -51,12 +51,49 @@ function showPage() {
                 contentElement.style.margin = '24px';
                 contentElement.innerHTML = k;
 
-                document.getElementById(`day-${new Date().getDay()}`).style.fontWeight = 'bold';
+                const now = new Date();
+                const currentDayRow = document.getElementById(`day-${now.getDay()}`);
+                const currentOpeningStatusElement = document.getElementById('current-opening-status');
+                const currentDayHourText = currentDayRow.lastElementChild.innerText;
+
+                if(currentDayHourText === 'Zárva' && !isStoreOpen(currentDayHourText, now)) {
+                    currentOpeningStatusElement.innerText = 'Zárva';
+                    currentOpeningStatusElement.style.color = 'red';
+                }else{
+                    currentOpeningStatusElement.innerText = 'Nyitva';
+                    currentOpeningStatusElement.style.color = 'green';
+                }
+
+                currentDayRow.style.fontWeight = 'bold';
             });
 
             routeButtons[3].className = 'active-route';
             break;
     }
+}
+
+/**
+  * @param { string } currentDayHourText
+  * @param { Date } now
+  */
+function isStoreOpen(currentDayHourText, now) {
+    if(currentDayHourText === 'Zárva') {
+        return true;
+    }
+
+    const dashIndex = currentDayHourText.indexOf('-');
+    const openingMinutes = parseTimeAsMinutes(currentDayHourText.substring(0, dashIndex));
+    const closingMinutes = parseTimeAsMinutes(currentDayHourText.substring(dashIndex + 1));
+    const nowMinutes = now.getHours() * 60 + now.getMinutes();
+
+    return nowMinutes >= openingMinutes && nowMinutes <= closingMinutes;
+}
+
+/** @param { string } text */
+function parseTimeAsMinutes(text) {
+    const separator = text.indexOf(':');
+
+    return Number.parseInt(text.substring(0, separator)) * 60 + Number.parseInt(text.substring(separator + 1));
 }
 
 function createPreloadElement(path, type) {
