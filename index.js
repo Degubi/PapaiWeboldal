@@ -56,7 +56,7 @@ function showPage() {
                 const currentOpeningStatusElement = document.getElementById('current-opening-status');
                 const currentDayHourText = currentDayRow.lastElementChild.innerText;
 
-                if(currentDayHourText === 'Zárva' && !isStoreOpen(currentDayHourText, now)) {
+                if(currentDayHourText === 'Zárva' || !isStoreOpen(currentDayHourText, now)) {
                     currentOpeningStatusElement.innerText = 'Zárva';
                     currentOpeningStatusElement.style.color = 'red';
                 }else{
@@ -77,10 +77,6 @@ function showPage() {
   * @param { Date } now
   */
 function isStoreOpen(currentDayHourText, now) {
-    if(currentDayHourText === 'Zárva') {
-        return true;
-    }
-
     const dashIndex = currentDayHourText.indexOf('-');
     const openingMinutes = parseTimeAsMinutes(currentDayHourText.substring(0, dashIndex));
     const closingMinutes = parseTimeAsMinutes(currentDayHourText.substring(dashIndex + 1));
@@ -96,6 +92,10 @@ function parseTimeAsMinutes(text) {
     return Number.parseInt(text.substring(0, separator)) * 60 + Number.parseInt(text.substring(separator + 1));
 }
 
+/**
+  * @param { string } path
+  * @param { string } type
+  */
 function createPreloadElement(path, type) {
     const element = document.createElement('link');
     element.rel = 'preload';
@@ -104,6 +104,7 @@ function createPreloadElement(path, type) {
     return element;
 }
 
+/** @param { number } n */
 function showSlide(n) {
     const slides = document.getElementsByClassName('slide-element');
     const dots = document.getElementsByClassName('dot');
@@ -127,7 +128,7 @@ function showSlide(n) {
 }
 
 
-window.routeTo = function(pagePath) {
+window.routeTo = function(/** @type { string } */ pagePath) {
     contentElement.scrollTo(0, 0);
 
     if(pagePath !== currentPagePath) {
