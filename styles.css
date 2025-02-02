@@ -68,6 +68,7 @@ nav .active-route {
 #logo {
     margin-left: 15%;
     width: 5%;
+    cursor: pointer;
 }
 
 footer {
