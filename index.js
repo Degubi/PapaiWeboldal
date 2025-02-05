@@ -1,4 +1,4 @@
-const contentElement = document.getElementById('content');
+const contentElement = document.getElementsByTagName('main')[0];
 const routeButtons = document.getElementById('routesContainer').children;
 let currentPagePath = new URLSearchParams(window.location.search).get('page') ?? 'main';
 let slideIndex = 1;
