@@ -134,7 +134,15 @@ window.routeTo = function(/** @type { string } */ pagePath) {
     if(pagePath !== currentPagePath) {
         window.history.pushState(currentPagePath, null, `?page=${pagePath}`);
         currentPagePath = pagePath;
-        return showPage();
+        showPage();
+    }
+
+    if(document.getElementById('phoneRoutesButton').offsetParent !== null) {
+        Array.prototype.forEach.call(routeButtons, k => {
+            if(!k.classList.contains('active-route')) {
+                k.style.display = 'none';
+            }
+        });
     }
 };
 
@@ -184,4 +192,12 @@ window.zoomGalleryImage = function(/**@type { HTMLImageElement } */ clickedImage
     document.body.appendChild(modalBackground);
     document.body.appendChild(fullscreenImage);
     document.body.addEventListener('keyup', escapeKeyListener);
+};
+
+window.togglePhoneNavigation = function() {
+    Array.prototype.forEach.call(routeButtons, k => {
+        if(!k.classList.contains('active-route')) {
+            k.style.display = k.style.display === 'none' || k.style.display === '' ? 'block' : 'none';
+        }
+    });
 };
