@@ -3,15 +3,15 @@ const routeButtons = document.getElementById('routesContainer').children;
 let currentPagePath = new URLSearchParams(window.location.search).get('page') ?? 'main';
 let slideIndex = 1;
 
-showPage(currentPagePath);
+showCurrentPage();
 window.history.replaceState(currentPagePath, null, `?page=${currentPagePath}`);
 window.addEventListener('popstate', _ => {
     const requestedPage = new URLSearchParams(window.location.search).get('page') ?? 'main';
     currentPagePath = requestedPage;
-    showPage();
+    showCurrentPage();
 });
 
-function showPage() {
+function showCurrentPage() {
     Array.prototype.forEach.call(routeButtons, k => k.className = '');
 
     switch(currentPagePath) {
@@ -106,24 +106,35 @@ function createPreloadElement(path, type) {
 
 /** @param { number } n */
 function showSlide(n) {
-    const slides = document.getElementsByClassName('slide-element');
+    /** @type { HTMLCollectionOf<HTMLImageElement> } */// @ts-ignore
+    const slideImages = document.getElementsByClassName('slide-element');
     const dots = document.getElementsByClassName('dot');
-    const slideCount = slides.length;
+    const slideCount = slideImages.length;
 
-    if(n > slideCount) {
-        slideIndex = 1;
-    }
+    slideIndex = n > slideCount ? 1 : n < 1 ? slideCount : slideIndex;
 
-    if(n < 1) {
-        slideIndex = slideCount;
+    const imageToDisplay = slideImages[slideIndex - 1];
+    if(imageToDisplay.complete) {
+        handleActiveImageChange(slideImages, dots);
+    }else{
+        imageToDisplay.removeAttribute('loading');
+        imageToDisplay.addEventListener('load', _ => handleActiveImageChange(slideImages, dots));
     }
+}
+
+/**
+  * @param { HTMLCollectionOf<HTMLImageElement> } slideImages
+  * @param { HTMLCollectionOf<Element> } dots
+  */
+function handleActiveImageChange(slideImages, dots) {
+    const slideCount = slideImages.length;
 
     for(let i = 0; i < slideCount; ++i) {
-        slides[i].style.display = 'none';
+        slideImages[i].style.display = 'none';
         dots[i].classList.remove('active');
     }
 
-    slides[slideIndex - 1].style.display = 'block';
+    slideImages[slideIndex - 1].style.display = 'block';
     dots[slideIndex - 1].classList.add('active');
 }
 
@@ -134,7 +145,7 @@ window.routeTo = function(/** @type { string } */ pagePath) {
     if(pagePath !== currentPagePath) {
         window.history.pushState(currentPagePath, null, `?page=${pagePath}`);
         currentPagePath = pagePath;
-        showPage();
+        showCurrentPage();
     }
 
     if(document.getElementById('phoneRoutesButton').offsetParent !== null) {
