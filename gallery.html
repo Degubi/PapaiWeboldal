@@ -1,8 +1,11 @@
 <style>
     .gallery-image {
-        height: 33vh;
-        padding: 25px;
-        display: inline-block;
+        height: 25vh;
+        padding: 25px 15px;
+    }
+
+    .gallery-section-title {
+        padding-left: 15px;
     }
 
     @media(hover: hover) {
@@ -12,29 +15,45 @@
         }
 
         .gallery-image:hover {
-            transform: scale(1.25);
+            transform: scale(1.15);
+        }
+    }
+
+    @media(max-width: 768px) {
+        .gallery-section-container {
+            text-align: center;
+        }
+
+        .gallery-section-title {
+            text-align: center;
         }
     }
 </style>
 
-<h1 style = "text-align: center">Galéria</h1>
-<div style = "text-align: center">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/1500x2000_1.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/1500x2000_2.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/1500x2000_3.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/1500x2000_4.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/1500x2000_5.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/1500x2000_6.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/1500x2000_7.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/1500x2000_8.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/1500x2000_9.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/1500x2000_10.webp" alt = "Galéria kép">
+<h1 style = "text-align: center;">Galéria</h1>
+<h2 class = "gallery-section-title">Bolt</h2>
+<div class = "gallery-section-container">
+    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/shop/outside1.webp" alt = "Bolt kívülről">
+    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/shop/outside2.webp" alt = "Bolt kívülről">
+    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/shop/inside1.webp" alt = "Bolt belülről">
+    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/shop/inside2.webp" alt = "Bolt belülről">
 </div>
-<div style = "text-align: center">
-<div class = "gallery-image-container">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/2000x1500_1.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/2000x1500_2.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/2000x1500_3.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/2000x1500_4.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/2000x1500_5.webp" alt = "Galéria kép">
+
+<h2 class = "gallery-section-title">Rerefenciák</h2>
+<div class = "gallery-section-container">
+    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/1500x2000_1.webp" alt = "Galéria kép">
+    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/1500x2000_2.webp" alt = "Galéria kép">
+    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/1500x2000_3.webp" alt = "Galéria kép">
+    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/2000x1500_1.webp" alt = "Galéria kép">
+    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/2000x1500_2.webp" alt = "Galéria kép">
+    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/1500x2000_4.webp" alt = "Galéria kép">
+    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/1500x2000_5.webp" alt = "Galéria kép">
+    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/1500x2000_6.webp" alt = "Galéria kép">
+    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/1500x2000_7.webp" alt = "Galéria kép">
+    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/1500x2000_8.webp" alt = "Galéria kép">
+    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/1500x2000_9.webp" alt = "Galéria kép">
+    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/1500x2000_10.webp" alt = "Galéria kép">
+    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/2000x1500_3.webp" alt = "Galéria kép">
+    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/2000x1500_4.webp" alt = "Galéria kép">
+    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/2000x1500_5.webp" alt = "Galéria kép">
 </div>

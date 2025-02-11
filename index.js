@@ -165,11 +165,12 @@ window.zoomGalleryImage = function(/**@type { HTMLImageElement } */ clickedImage
         document.body.style.overflowY = '';
         document.body.removeChild(fullscreenImage);
         document.body.removeChild(modalBackground);
+        document.body.removeChild(closeButton);
         document.body.removeEventListener('keyup', escapeKeyListener);
     };
 
     const fullscreenImage = document.createElement('img');
-    fullscreenImage.src = clickedImage.src;
+    fullscreenImage.src = clickedImage.src.replace('.webp', '_hd.webp');
     fullscreenImage.style.position = 'absolute';
     fullscreenImage.style.zIndex = '2';
     fullscreenImage.style.top = `calc(${scrollY}px + 50%)`;
@@ -199,9 +200,21 @@ window.zoomGalleryImage = function(/**@type { HTMLImageElement } */ clickedImage
 
     modalBackground.addEventListener('click', removeZoomedImage);
 
+    const closeButton = document.createElement('div');
+    closeButton.style.position = 'absolute';
+    closeButton.style.right = '32px';
+    closeButton.style.top = `${scrollY + 32}px`;
+    closeButton.style.color = 'white';
+    closeButton.style.cursor = 'pointer';
+    closeButton.style.zIndex = '2';
+    closeButton.style.fontSize = '22px';
+    closeButton.innerText = 'X';
+    closeButton.addEventListener('click', removeZoomedImage);
+
     document.body.style.overflowY = 'hidden';
     document.body.appendChild(modalBackground);
     document.body.appendChild(fullscreenImage);
+    document.body.appendChild(closeButton);
     document.body.addEventListener('keyup', escapeKeyListener);
 };
 
