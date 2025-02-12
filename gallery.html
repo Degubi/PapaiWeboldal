@@ -2,10 +2,34 @@
     .gallery-image {
         height: 25vh;
         padding: 25px 15px;
+        display: none;
     }
 
     .gallery-section-title {
         padding-left: 15px;
+    }
+
+    .gallery-section-placeholder {
+        display: inline-block;
+        height: 25vh;
+        width: 75%;
+        margin: 25px 15px;
+        position: relative;
+        background: linear-gradient(to right, #eeeeee 8%, #bbbbbb 18%, #eeeeee 33%);
+        background-size: 800px 104px;
+        animation-duration: 2s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: placeHolderShimmer;
+        animation-timing-function: linear;
+    }
+
+    .gallery-section-placeholder-divider {
+        background-color: #fff;
+        position: absolute;
+        top: 0px;
+        height: 100%;
+        width: 30px;
     }
 
     @media(hover: hover) {
@@ -20,40 +44,44 @@
     }
 
     @media(max-width: 768px) {
-        .gallery-section-container {
+        gallery-section {
             text-align: center;
         }
+    }
 
-        .gallery-section-title {
-            text-align: center;
+    @keyframes placeHolderShimmer {
+        0% {
+            background-position: -800px 0
+        }
+        100% {
+            background-position: 800px 0
         }
     }
 </style>
 
 <h1 style = "text-align: center;">Galéria</h1>
-<h2 class = "gallery-section-title">Bolt</h2>
-<div class = "gallery-section-container">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/shop/outside1.webp" alt = "Bolt kívülről">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/shop/outside2.webp" alt = "Bolt kívülről">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/shop/inside1.webp" alt = "Bolt belülről">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/shop/inside2.webp" alt = "Bolt belülről">
-</div>
-
-<h2 class = "gallery-section-title">Referenciák</h2>
-<div class = "gallery-section-container">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/1500x2000_1.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/1500x2000_2.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/1500x2000_3.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/2000x1500_1.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/2000x1500_2.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/1500x2000_4.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/1500x2000_5.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/1500x2000_6.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/1500x2000_7.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/1500x2000_8.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/1500x2000_9.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/1500x2000_10.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/2000x1500_3.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/2000x1500_4.webp" alt = "Galéria kép">
-    <img loading = "lazy" class = "gallery-image" onclick = "zoomGalleryImage(this)" src = "assets/gallery/references/2000x1500_5.webp" alt = "Galéria kép">
-</div>
+<gallery-section section-title = "Bolt" section-data-list = "shop-items"></gallery-section>
+<datalist id = "shop-items">
+    <option value = "shop/outside1.webp"></option>
+    <option value = "shop/outside2.webp"></option>
+    <option value = "shop/inside1.webp"></option>
+    <option value = "shop/inside2.webp"></option>
+</datalist>
+<gallery-section section-title = "Referenciák" section-data-list = "reference-items"></gallery-section>
+<datalist id = "reference-items">
+    <option value = "references/1500x2000_1.webp"></option>
+    <option value = "references/1500x2000_2.webp"></option>
+    <option value = "references/1500x2000_3.webp"></option>
+    <option value = "references/2000x1500_1.webp"></option>
+    <option value = "references/2000x1500_2.webp"></option>
+    <option value = "references/1500x2000_4.webp"></option>
+    <option value = "references/1500x2000_5.webp"></option>
+    <option value = "references/1500x2000_6.webp"></option>
+    <option value = "references/1500x2000_7.webp"></option>
+    <option value = "references/1500x2000_8.webp"></option>
+    <option value = "references/1500x2000_9.webp"></option>
+    <option value = "references/1500x2000_10.webp"></option>
+    <option value = "references/2000x1500_3.webp"></option>
+    <option value = "references/2000x1500_4.webp"></option>
+    <option value = "references/2000x1500_5.webp"></option>
+</datalist>

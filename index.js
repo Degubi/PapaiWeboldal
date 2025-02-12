@@ -1,5 +1,6 @@
 const contentElement = document.getElementsByTagName('main')[0];
 const routeButtons = document.getElementById('routesContainer').children;
+const isMobile = window.matchMedia('(max-width: 768px)').matches;
 let currentPagePath = new URLSearchParams(window.location.search).get('page') ?? 'main';
 let slideIndex = 1;
 
@@ -138,28 +139,8 @@ function handleActiveImageChange(slideImages, dots) {
     dots[slideIndex - 1].classList.add('active');
 }
 
-
-window.routeTo = function(/** @type { string } */ pagePath) {
-    contentElement.scrollTo(0, 0);
-
-    if(pagePath !== currentPagePath) {
-        window.history.pushState(currentPagePath, null, `?page=${pagePath}`);
-        currentPagePath = pagePath;
-        showCurrentPage();
-    }
-
-    if(document.getElementById('phoneRoutesButton').offsetParent !== null) {
-        Array.prototype.forEach.call(routeButtons, k => {
-            if(!k.classList.contains('active-route')) {
-                k.style.display = 'none';
-            }
-        });
-    }
-};
-
-window.slideByOffset = function(n) { showSlide(slideIndex += n); };
-window.nthSlide = function(n) { showSlide(slideIndex = n); };
-window.zoomGalleryImage = function(/**@type { HTMLImageElement } */ clickedImage) {
+/** @param { HTMLImageElement } clickedImage */
+function zoomGalleryImage(clickedImage) {
     const scrollY = window.scrollY;
     const removeZoomedImage = () => {
         document.body.style.overflowY = '';
@@ -180,14 +161,14 @@ window.zoomGalleryImage = function(/**@type { HTMLImageElement } */ clickedImage
     if(window.innerWidth < window.innerHeight) {
         fullscreenImage.style.width = '80%';
     }else{
-        fullscreenImage.style.height = '80%';
+        fullscreenImage.style.height = '80dvh';
     }
 
     const modalBackground = document.createElement('div');
     modalBackground.style.position = 'absolute';
     modalBackground.style.top = `${scrollY}px`;
     modalBackground.style.width = '100%';
-    modalBackground.style.height = '100%';
+    modalBackground.style.height = '100dvh';
     modalBackground.style.backgroundColor = 'black';
     modalBackground.style.opacity = '0.75';
     modalBackground.style.zIndex = '1';
@@ -218,6 +199,51 @@ window.zoomGalleryImage = function(/**@type { HTMLImageElement } */ clickedImage
     document.body.addEventListener('keyup', escapeKeyListener);
 };
 
+
+window.customElements.define('gallery-section', class extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        const titleElement = document.createElement('h2');
+        titleElement.className = 'gallery-section-title';
+        titleElement.innerText = this.getAttribute('section-title');
+
+        const placeholder = document.createElement('div');
+        placeholder.className = 'gallery-section-placeholder';
+        placeholder.innerHTML = !isMobile ? '<div class = "gallery-section-placeholder-divider" style = "left: 23%;"></div>' +
+                                            '<div class = "gallery-section-placeholder-divider" style = "left: 48%;"></div>' +
+                                            '<div class = "gallery-section-placeholder-divider" style = "left: 74%;"></div>' : '';
+        this.style.display = 'block';
+        this.appendChild(titleElement);
+        this.appendChild(placeholder);
+
+        /** @type { HTMLCollectionOf<HTMLOptionElement> } */
+        const imageOptions = document.getElementById(this.getAttribute('section-data-list')).options;
+        let loadedImages = 0;
+
+        const imageElements = Array.prototype.reduce.call(imageOptions, (/** @type { HTMLImageElement[] } */ result, /** @type { HTMLOptionElement } */ k) => {
+            const image = document.createElement('img');
+            image.className = 'gallery-image';
+            image.src = `assets/gallery/${k.value}`;
+            image.addEventListener('click', e => zoomGalleryImage(e.target));
+            image.addEventListener('load', _ => {
+                ++loadedImages;
+
+                if(loadedImages === imageOptions.length) {
+                    this.removeChild(placeholder);
+                    imageElements.forEach(k => k.style.display = 'inline');
+                }
+            });
+
+            result.push(image);
+            this.appendChild(image);
+            return result;
+        }, []);
+    }
+});
+
 window.togglePhoneNavigation = function() {
     Array.prototype.forEach.call(routeButtons, k => {
         if(!k.classList.contains('active-route')) {
@@ -225,3 +251,24 @@ window.togglePhoneNavigation = function() {
         }
     });
 };
+
+window.routeTo = function(/** @type { string } */ pagePath) {
+    contentElement.scrollTo(0, 0);
+
+    if(pagePath !== currentPagePath) {
+        window.history.pushState(currentPagePath, null, `?page=${pagePath}`);
+        currentPagePath = pagePath;
+        showCurrentPage();
+    }
+
+    if(document.getElementById('phoneRoutesButton').offsetParent !== null) {
+        Array.prototype.forEach.call(routeButtons, k => {
+            if(!k.classList.contains('active-route')) {
+                k.style.display = 'none';
+            }
+        });
+    }
+};
+
+window.slideByOffset = function(n) { showSlide(slideIndex += n); };
+window.nthSlide = function(n) { showSlide(slideIndex = n); };
