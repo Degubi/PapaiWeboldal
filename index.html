@@ -6,7 +6,7 @@
         <meta name = "description" content = "Pápai Fázismester Kft. hivatalos weboldala">
         <title>Pápai Fázismester Kft.</title>
         <link rel = "preload" href = "assets/main/shop_outside.webp" as = "image">
-        <link rel = "preload" href = "main.html" as = "fetch" crossorigin = "anonymous">
+        <link rel = "preload" href = "pages/main.html" as = "fetch" crossorigin = "anonymous">
         <link rel = "stylesheet" href = "styles.css">
         <script src = "index.js" type = "module"></script>
     </head>
@@ -24,12 +24,12 @@
             </div>
         </header>
         <nav>
-            <img id = "logo" onclick = "routeTo('main')" src = "assets/logo.webp" alt = "Company Logo">
+            <img id = "logo" onclick = "routeTo(event, 'main')" src = "assets/logo.webp" alt = "Company Logo">
             <div id = "routesContainer">
-                <a onclick = "routeTo('main')">Főoldal</a><!--
-             --><a onclick = "routeTo('gallery')">Galéria</a><!--
-             --><a onclick = "routeTo('about')">Rólunk</a><!--
-             --><a onclick = "routeTo('contact')">Elérhetőség</a>
+                <a href = "/" onclick = "routeTo(event, 'main')">Főoldal</a><!--
+             --><a href = "/gallery" onclick = "routeTo(event, 'gallery')">Galéria</a><!--
+             --><a href = "/about" onclick = "routeTo(event, 'about')">Rólunk</a><!--
+             --><a href = "/contact" onclick = "routeTo(event, 'contact')">Elérhetőség</a>
             </div>
             <button id = "phoneRoutesButton" onclick = "togglePhoneNavigation()" style = "display: none;">☰</button>
         </nav>

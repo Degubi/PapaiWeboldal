@@ -17,7 +17,7 @@ function showCurrentPage() {
 
     switch(currentPagePath) {
         case 'main':
-            fetch('main.html').then(k => k.text()).then(k => {
+            fetch('pages/main.html').then(k => k.text()).then(k => {
                 contentElement.style.margin = '0px';
                 contentElement.innerHTML = k;
             });
@@ -25,7 +25,7 @@ function showCurrentPage() {
             routeButtons[0].className = 'active-route';
             break;
         case 'gallery':
-            fetch('gallery.html').then(k => k.text()).then(k => {
+            fetch('pages/gallery.html').then(k => k.text()).then(k => {
                 contentElement.style.margin = '24px';
                 contentElement.innerHTML = k;
             });
@@ -35,7 +35,7 @@ function showCurrentPage() {
         case 'about':
             contentElement.appendChild(createPreloadElement('assets/about/shop.webp', 'image'));
 
-            fetch('about.html').then(k => k.text()).then(k => {
+            fetch('pages/about.html').then(k => k.text()).then(k => {
                 contentElement.style.margin = '24px';
                 contentElement.innerHTML = k;
             });
@@ -48,7 +48,7 @@ function showCurrentPage() {
             preconnect.toggleAttribute('crossorigin');
             contentElement.appendChild(preconnect);
 
-            fetch('contact.html').then(k => k.text()).then(k => {
+            fetch('pages/contact.html').then(k => k.text()).then(k => {
                 contentElement.style.margin = '24px';
                 contentElement.innerHTML = k;
 
@@ -252,7 +252,8 @@ window.togglePhoneNavigation = function() {
     });
 };
 
-window.routeTo = function(/** @type { string } */ pagePath) {
+window.routeTo = function(event, /** @type { string } */ pagePath) {
+    event.preventDefault();
     contentElement.scrollTo(0, 0);
 
     if(pagePath !== currentPagePath) {
