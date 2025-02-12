@@ -227,6 +227,7 @@ window.customElements.define('gallery-section', class extends HTMLElement {
             const image = document.createElement('img');
             image.className = 'gallery-image';
             image.src = `assets/gallery/${k.value}`;
+            image.alt = k.innerText;
             image.addEventListener('click', e => zoomGalleryImage(e.target));
             image.addEventListener('load', _ => {
                 ++loadedImages;
