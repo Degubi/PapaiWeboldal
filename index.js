@@ -247,7 +247,7 @@ window.customElements.define('gallery-section', class extends HTMLElement {
 window.togglePhoneNavigation = function() {
     Array.prototype.forEach.call(routeButtons, k => {
         if(!k.classList.contains('active-route')) {
-            k.style.display = k.style.display === 'none' || k.style.display === '' ? 'block' : 'none';
+            k.style.display = k.style.display === 'none' || k.style.display === '' ? 'block' : '';
         }
     });
 };
@@ -265,7 +265,7 @@ window.routeTo = function(event, /** @type { string } */ pagePath) {
     if(document.getElementById('phoneRoutesButton').offsetParent !== null) {
         Array.prototype.forEach.call(routeButtons, k => {
             if(!k.classList.contains('active-route')) {
-                k.style.display = 'none';
+                k.style.display = '';
             }
         });
     }
