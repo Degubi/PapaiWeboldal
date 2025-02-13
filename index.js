@@ -2,7 +2,7 @@ const contentElement = document.getElementsByTagName('main')[0];
 const routeButtons = document.getElementById('routesContainer').children;
 const isMobile = window.matchMedia('(max-width: 768px)').matches;
 let currentPagePath = new URLSearchParams(window.location.search).get('page') ?? 'main';
-let slideIndex = 1;
+let activeSlideOrdinal = 1;
 
 showCurrentPage();
 window.history.replaceState(currentPagePath, null, `?page=${currentPagePath}`);
@@ -23,6 +23,7 @@ function showCurrentPage() {
             });
 
             routeButtons[0].className = 'active-route';
+            document.title = 'Pápai Fázismester Kft.';
             break;
         case 'gallery':
             fetch('pages/gallery.html').then(k => k.text()).then(k => {
@@ -31,6 +32,7 @@ function showCurrentPage() {
             });
 
             routeButtons[1].className = 'active-route';
+            document.title = 'Galéria - Pápai Fázismester Kft.';
             break;
         case 'about':
             contentElement.appendChild(createPreloadElement('assets/about/shop.webp', 'image'));
@@ -41,6 +43,7 @@ function showCurrentPage() {
             });
 
             routeButtons[2].className = 'active-route';
+            document.title = 'Rólunk - Pápai Fázismester Kft.';
             break;
         case 'contact':
             const preconnect = document.createElement('link');
@@ -69,14 +72,15 @@ function showCurrentPage() {
             });
 
             routeButtons[3].className = 'active-route';
+            document.title = 'Elérhetőség - Pápai Fázismester Kft.';
             break;
     }
 }
 
 /**
-  * @param { string } currentDayHourText
-  * @param { Date } now
-  */
+ * @param { string } currentDayHourText
+ * @param { Date } now
+ */
 function isStoreOpen(currentDayHourText, now) {
     const dashIndex = currentDayHourText.indexOf('-');
     const openingMinutes = parseTimeAsMinutes(currentDayHourText.substring(0, dashIndex));
@@ -94,9 +98,9 @@ function parseTimeAsMinutes(text) {
 }
 
 /**
-  * @param { string } path
-  * @param { string } type
-  */
+ * @param { string } path
+ * @param { string } type
+ */
 function createPreloadElement(path, type) {
     const element = document.createElement('link');
     element.rel = 'preload';
@@ -112,9 +116,9 @@ function showSlide(n) {
     const dots = document.getElementsByClassName('dot');
     const slideCount = slideImages.length;
 
-    slideIndex = n > slideCount ? 1 : n < 1 ? slideCount : slideIndex;
+    activeSlideOrdinal = n > slideCount ? 1 : n < 1 ? slideCount : activeSlideOrdinal;
 
-    const imageToDisplay = slideImages[slideIndex - 1];
+    const imageToDisplay = slideImages[activeSlideOrdinal - 1];
     if(imageToDisplay.complete) {
         handleActiveImageChange(slideImages, dots);
     }else{
@@ -124,9 +128,9 @@ function showSlide(n) {
 }
 
 /**
-  * @param { HTMLCollectionOf<HTMLImageElement> } slideImages
-  * @param { HTMLCollectionOf<Element> } dots
-  */
+ * @param { HTMLCollectionOf<HTMLImageElement> } slideImages
+ * @param { HTMLCollectionOf<Element> } dots
+ */
 function handleActiveImageChange(slideImages, dots) {
     const slideCount = slideImages.length;
 
@@ -135,8 +139,8 @@ function handleActiveImageChange(slideImages, dots) {
         dots[i].classList.remove('active');
     }
 
-    slideImages[slideIndex - 1].style.display = 'block';
-    dots[slideIndex - 1].classList.add('active');
+    slideImages[activeSlideOrdinal - 1].style.display = 'block';
+    dots[activeSlideOrdinal - 1].classList.add('active');
 }
 
 /** @param { HTMLImageElement } clickedImage */
@@ -198,6 +202,16 @@ function zoomGalleryImage(clickedImage) {
     document.body.appendChild(closeButton);
     document.body.addEventListener('keyup', escapeKeyListener);
 };
+
+function preloadSlideByOffset(offset) {
+    /** @type { HTMLCollectionOf<HTMLImageElement> } */// @ts-ignore
+    const slideImages = document.getElementsByClassName('slide-element');
+    const slideCount = slideImages.length;
+    const slideOrdinal = activeSlideOrdinal + offset;
+    const checkedSlideOrdinal = slideOrdinal > slideCount ? 1 : slideOrdinal < 1 ? slideCount : slideOrdinal;
+
+    contentElement.appendChild(createPreloadElement(slideImages[checkedSlideOrdinal - 1].src, 'image'));
+}
 
 
 window.customElements.define('gallery-section', class extends HTMLElement {
@@ -272,5 +286,9 @@ window.routeTo = function(event, /** @type { string } */ pagePath) {
     }
 };
 
-window.slideByOffset = function(n) { showSlide(slideIndex += n); };
-window.nthSlide = function(n) { showSlide(slideIndex = n); };
+window.nthSlide = function(n) { showSlide(activeSlideOrdinal = n); };
+window.preloadSlideByOffset = function(n) { preloadSlideByOffset(n); }
+window.slideByOffset = function(offset) {
+    showSlide(activeSlideOrdinal += offset);
+    preloadSlideByOffset(offset);
+};
