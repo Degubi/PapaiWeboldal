@@ -1,13 +1,13 @@
 const contentElement = document.getElementsByTagName('main')[0];
 const routeButtons = document.getElementById('routesContainer').children;
 const isMobile = window.matchMedia('(max-width: 768px)').matches;
-let currentPagePath = new URLSearchParams(window.location.search).get('page') ?? 'main';
+let currentPagePath = window.location.hash.length === 0 ? 'main' : window.location.hash.substring(1);
 let activeSlideOrdinal = 1;
 
 showCurrentPage();
-window.history.replaceState(currentPagePath, null, `?page=${currentPagePath}`);
+window.history.replaceState(currentPagePath, null, `#${currentPagePath}`);
 window.addEventListener('popstate', _ => {
-    const requestedPage = new URLSearchParams(window.location.search).get('page') ?? 'main';
+    const requestedPage = window.location.hash.length === 0 ? 'main' : window.location.hash.substring(1);
     currentPagePath = requestedPage;
     showCurrentPage();
 });
@@ -272,7 +272,7 @@ window.routeTo = function(event, /** @type { string } */ pagePath) {
     contentElement.scrollTo(0, 0);
 
     if(pagePath !== currentPagePath) {
-        window.history.pushState(currentPagePath, null, `?page=${pagePath}`);
+        window.history.pushState(currentPagePath, null, `#${pagePath}`);
         currentPagePath = pagePath;
         showCurrentPage();
     }
