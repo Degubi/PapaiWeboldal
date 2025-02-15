@@ -7,8 +7,7 @@ let activeSlideOrdinal = 1;
 showCurrentPage();
 window.history.replaceState(currentPagePath, null, `#${currentPagePath}`);
 window.addEventListener('popstate', _ => {
-    const requestedPage = window.location.hash.length === 0 ? 'main' : window.location.hash.substring(1);
-    currentPagePath = requestedPage;
+    currentPagePath = window.location.hash.length === 0 ? 'main' : window.location.hash.substring(1);
     showCurrentPage();
 });
 
@@ -17,33 +16,15 @@ function showCurrentPage() {
 
     switch(currentPagePath) {
         case 'main':
-            fetch('pages/main.html').then(k => k.text()).then(k => {
-                contentElement.style.margin = '0px';
-                contentElement.innerHTML = k;
-            });
-
-            routeButtons[0].className = 'active-route';
-            document.title = 'Pápai Fázismester Kft.';
+            updateRoute('main.html', '0px', 0, 'Pápai Fázismester Kft.');
             break;
         case 'gallery':
-            fetch('pages/gallery.html').then(k => k.text()).then(k => {
-                contentElement.style.margin = '24px';
-                contentElement.innerHTML = k;
-            });
-
-            routeButtons[1].className = 'active-route';
-            document.title = 'Galéria - Pápai Fázismester Kft.';
+            updateRoute('gallery.html', '24px', 1, 'Galéria - Pápai Fázismester Kft.');
             break;
         case 'about':
             contentElement.appendChild(createPreloadElement('assets/about/shop.webp', 'image'));
 
-            fetch('pages/about.html').then(k => k.text()).then(k => {
-                contentElement.style.margin = '24px';
-                contentElement.innerHTML = k;
-            });
-
-            routeButtons[2].className = 'active-route';
-            document.title = 'Rólunk - Pápai Fázismester Kft.';
+            updateRoute('about.html', '24px', 2, 'Rólunk - Pápai Fázismester Kft.');
             break;
         case 'contact':
             const preconnect = document.createElement('link');
@@ -51,10 +32,7 @@ function showCurrentPage() {
             preconnect.toggleAttribute('crossorigin');
             contentElement.appendChild(preconnect);
 
-            fetch('pages/contact.html').then(k => k.text()).then(k => {
-                contentElement.style.margin = '24px';
-                contentElement.innerHTML = k;
-
+            updateRoute('contact.html', '24px', 3, 'Elérhetőség - Pápai Fázismester Kft.', () => {
                 const now = new Date();
                 const currentDayRow = document.getElementById(`day-${now.getDay()}`);
                 const currentOpeningStatusElement = document.getElementById('current-opening-status');
@@ -70,11 +48,25 @@ function showCurrentPage() {
 
                 currentDayRow.style.fontWeight = 'bold';
             });
-
-            routeButtons[3].className = 'active-route';
-            document.title = 'Elérhetőség - Pápai Fázismester Kft.';
             break;
     }
+}
+
+/**
+ * @param { string } fragmentPath
+ * @param { string } fragmentMargin
+ * @param { number } routeIndex
+ * @param { string } pageTitle
+ */
+function updateRoute(fragmentPath, fragmentMargin, routeIndex, pageTitle, postLoad = () => {}) {
+    fetch(`pages/${fragmentPath}`).then(k => k.text()).then(k => {
+        contentElement.style.margin = fragmentMargin;
+        contentElement.innerHTML = k;
+        postLoad();
+    });
+
+    routeButtons[routeIndex].className = 'active-route';
+    document.title = pageTitle;
 }
 
 /**
@@ -203,6 +195,7 @@ function zoomGalleryImage(clickedImage) {
     document.body.addEventListener('keyup', escapeKeyListener);
 };
 
+/** @param { number } offset */
 function preloadSlideByOffset(offset) {
     /** @type { HTMLCollectionOf<HTMLImageElement> } */// @ts-ignore
     const slideImages = document.getElementsByClassName('slide-element');
@@ -278,7 +271,7 @@ window.routeTo = function(event, /** @type { string } */ pagePath) {
     }
 
     if(document.getElementById('phoneRoutesButton').offsetParent !== null) {
-        Array.prototype.forEach.call(routeButtons, k => {
+        Array.prototype.forEach.call(routeButtons, (/** @type { HTMLElement } */ k) => {
             if(!k.classList.contains('active-route')) {
                 k.style.display = '';
             }
