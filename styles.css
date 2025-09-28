@@ -148,7 +148,10 @@ footer li {
         float: right;
         display: block !important;
         margin-right: 5%;
+        margin-top: 2.5%;
         font-size: 24px;
+        border: none;
+        background: none;
     }
 
     footer #table {
