@@ -1,0 +1,10 @@
+{
+    "name": "papaiweboldal",
+    "type": "module",
+    "author": "Degubi",
+    "devDependencies": {
+        "clean-css": "5.3.3",
+        "html-minifier": "4.0.0",
+        "terser": "5.38.2"
+    }
+}
