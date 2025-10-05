@@ -33,14 +33,7 @@ const extensionsToMinifiers = { '.js':  k => minifyJS(k, jsMinifySettings).then(
 rmSync(outputDir, { recursive: true, force: true });
 mkdirSync(outputDir);
 
-minifyFile('index.html', '.');
-minifyFile('index.js', '.');
-minifyFile('styles.css', '.');
-minifyFile('CNAME', '.');
-minifyFile('favicon.png', '.');
-
-minifyFolder('assets', 'assets');
-minifyFolder('pages', 'pages');
+minifyFolder('src', '.');
 
 
 /**
@@ -48,7 +41,7 @@ minifyFolder('pages', 'pages');
  * @param { string } outputFolder
  */
 async function minifyFolder(inputFolder, outputFolder) {
-    const [ files, folders ] = partitionBy((await readdir(inputFolder)), k => k.includes('.'));
+    const [ files, folders ] = partitionBy((await readdir(inputFolder)), k => k === 'CNAME' || k.includes('.'));
     const folderPath = `${outputDir}/${outputFolder}`;
 
     if((files.length + folders.length) > 0) {
